@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RevitVersion Condition="'$(RevitVersion)' == ''">2025</RevitVersion>
+    <TargetFramework Condition="'$(RevitVersion)' == '2024'">net48</TargetFramework>
+    <TargetFramework Condition="'$(RevitVersion)' != '2024'">net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>RevitSlopePlugin</RootNamespace>
+    <AssemblyName>RevitSlopePlugin</AssemblyName>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <OutputPath>bin\$(Configuration)\$(RevitVersion)\</OutputPath>
+    <RevitApiPath>C:\Program Files\Autodesk\Revit $(RevitVersion)</RevitApiPath>
+    <Description>Plugin para aplicação automática de inclinação em redes hidráulicas de esgoto sanitário no Revit $(RevitVersion).</Description>
+    <Company>RevitSlopePlugin</Company>
+    <Product>Revit Slope Plugin</Product>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <!-- ============================================================
+       REFERENCIAS DA API DO REVIT
+       ============================================================
+       As DLLs abaixo sao fornecidas com a instalacao do Revit.
+       Caminho padrao: C:\Program Files\Autodesk\Revit $(RevitVersion)\
+       
+       Ajuste o <HintPath> caso o Revit esteja instalado em outro local.
+       Importante: todas devem ter CopyLocal = false (Private = false)
+       pois o Revit já carrega essas DLLs em memória.
+       ============================================================ -->
+  <ItemGroup>
+    <Reference Include="RevitAPI">
+      <HintPath>$(RevitApiPath)\RevitAPI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>$(RevitApiPath)\RevitAPIUI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="RevitSlopePlugin.addin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <!-- Pacotes NuGet opcionais para desenvolvimento sem Revit instalado.
+       Descomente as linhas abaixo se preferir usar os pacotes NuGet
+       em vez das referências diretas acima.
+  <ItemGroup>
+    <PackageReference Include="Autodesk.Revit.SDK" Version="2025.*" PrivateAssets="all" />
+  </ItemGroup>
+  -->
+
+</Project>

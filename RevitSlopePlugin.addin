@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ============================================================
+  RevitSlopePlugin — Arquivo de Manifesto (.addin)
+  ============================================================
+  
+  Este arquivo deve ser copiado para:
+    %ProgramData%\Autodesk\Revit\Addins\2025\
+  
+  O Revit 2025 lê automaticamente todos os .addin nessa pasta
+  ao iniciar, registrando os comandos disponíveis.
+  
+  Para distribuicao, prefira o script Scripts\Install-OfficeHidraulica.ps1.
+  Ele gera um manifesto com o caminho absoluto correto da DLL instalada.
+  ============================================================
+-->
+<RevitAddIns>
+  <AddIn Type="Application">
+    <!-- Aplicação carregada ao iniciar o Revit para criar a aba do plugin -->
+    <Name>Office - Hidraulica</Name>
+    
+    <!-- Classe que implementa IExternalApplication (namespace completo) -->
+    <FullClassName>RevitSlopePlugin.App</FullClassName>
+    
+    <!-- Caminho relativo quando o .addin fica na mesma pasta da DLL -->
+    <Assembly>.\RevitSlopePlugin.dll</Assembly>
+    
+    <!-- GUID unico para esta aplicacao (nao alterar) -->
+    <AddInId>CBC0EDAA-8D19-4A25-8BDC-74B4FB29EDA5</AddInId>
+    
+    <!-- Descrição exibida como tooltip no Revit -->
+    <Description>
+      Aplica inclinação automática em redes hidráulicas de esgoto sanitário.
+      Selecione o elemento base (ponto fixo/jusante), defina a inclinação desejada
+      e o plugin ajusta toda a rede conectada mantendo o ponto base imóvel.
+    </Description>
+    
+    <!-- Vendor obrigatório -->
+    <VendorId>RevitSlopePlugin</VendorId>
+    <VendorDescription>Plugin para inclinação automática de redes de esgoto sanitário</VendorDescription>
+  </AddIn>
+</RevitAddIns>

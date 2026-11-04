@@ -1,0 +1,117 @@
+<Window x:Class="RevitSlopePlugin.UI.SlopeInputWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Aplicar Inclinação — Rede de Esgoto"
+        Height="320" Width="420"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStyle="SingleBorderWindow"
+        Background="#F5F5F5">
+
+    <Window.Resources>
+        <!-- Estilo para botões -->
+        <Style x:Key="BtnStyle" TargetType="Button">
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20,0"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>  <!-- Título -->
+            <RowDefinition Height="Auto"/>  <!-- Info do elemento -->
+            <RowDefinition Height="15"/>    <!-- Espaço -->
+            <RowDefinition Height="Auto"/>  <!-- Label inclinação -->
+            <RowDefinition Height="Auto"/>  <!-- Input inclinação -->
+            <RowDefinition Height="Auto"/>  <!-- Dica -->
+            <RowDefinition Height="*"/>     <!-- Espaço flexível -->
+            <RowDefinition Height="Auto"/>  <!-- Botões -->
+        </Grid.RowDefinitions>
+
+        <!-- Título -->
+        <TextBlock Grid.Row="0"
+                   Text="Definir Inclinação da Rede"
+                   FontSize="18" FontWeight="Bold"
+                   Foreground="#333333"
+                   Margin="0,0,0,10"/>
+
+        <!-- Info do elemento inicial selecionado -->
+        <Border Grid.Row="1" Background="#E8F0FE" CornerRadius="4" Padding="10,8">
+            <StackPanel>
+                <TextBlock Text="Elemento inicial e pontos travados:" 
+                           FontSize="11" Foreground="#555" FontWeight="SemiBold"/>
+                <TextBlock x:Name="txtBaseElementInfo" 
+                           Text="Pipe — Id: 12345" 
+                           FontSize="12" Foreground="#1A73E8" Margin="0,2,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Label -->
+        <TextBlock Grid.Row="3"
+                   Text="Inclinação desejada (%):"
+                   FontSize="14" Foreground="#333"
+                   Margin="0,0,0,5"/>
+
+        <!-- Input de inclinação -->
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="txtSlope"
+                     Grid.Column="0"
+                     Text="2.0"
+                     FontSize="18"
+                     Height="40"
+                     VerticalContentAlignment="Center"
+                     Padding="10,0"
+                     BorderBrush="#CCCCCC"
+                     BorderThickness="1"
+                     GotFocus="TxtSlope_GotFocus"/>
+
+            <TextBlock Grid.Column="1"
+                       Text="%"
+                       FontSize="18"
+                       VerticalAlignment="Center"
+                       Margin="8,0,0,0"
+                       Foreground="#666"/>
+        </Grid>
+
+        <!-- Dica -->
+        <TextBlock Grid.Row="5"
+                   Text="💡 Valores típicos para esgoto sanitário: 1% a 5%"
+                   FontSize="11" Foreground="#888"
+                   Margin="0,5,0,0"/>
+
+        <!-- Botões -->
+        <StackPanel Grid.Row="7" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right"
+                    Margin="0,10,0,0">
+
+            <Button x:Name="btnCancel"
+                    Content="Cancelar"
+                    Style="{StaticResource BtnStyle}"
+                    Background="#E0E0E0"
+                    Foreground="#333"
+                    Width="100"
+                    Click="BtnCancel_Click"
+                    Margin="0,0,10,0"/>
+
+            <Button x:Name="btnApply"
+                    Content="✓ Aplicar"
+                    Style="{StaticResource BtnStyle}"
+                    Background="#1A73E8"
+                    Foreground="White"
+                    Width="130"
+                    Click="BtnApply_Click"
+                    IsDefault="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
